@@ -25,6 +25,7 @@ jobs:
       s3_bucket: "my-unique-bucket-name"
       stack_name: "my-stack-name"
       sam_params_repo_path: "sam-params/prod.cfg"
+      # region: us-east-1 # This is the default
     secrets:
       EB_AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
       EB_AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
