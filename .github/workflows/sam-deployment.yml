@@ -85,7 +85,7 @@ jobs:
         continue-on-error: true
         # We take the first line (%s) from the git log and then escape out any single quotes
         # https://stackoverflow.com/a/24247870
-        run: echo COMMIT_MESSAGE=\'$(git log -n 1 --pretty=format:%s | sed "s@'@'\\\''@g;")\' >> $GITHUB_ENV
+        run: echo COMMIT_MESSAGE=$(git log -n 1 --pretty=format:%s) >> $GITHUB_ENV
 
       - name: Notify Slack on Success
         uses: ravsamhq/notify-slack-action@v1
