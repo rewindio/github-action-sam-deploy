@@ -72,7 +72,7 @@ jobs:
           sam deploy \
           ${{ inputs.extra_sam_args }} \
           --stack-name ${{ inputs.stack_name }} \
-          --s3-bucket ${{ inputs.s3-bucket }} \
+          --s3-bucket ${{ inputs.s3_bucket }} \
           --region ${{ inputs.region }} \
           --parameter-overrides "$( < "${{ inputs.sam_params_repo_path}}" )"
 
