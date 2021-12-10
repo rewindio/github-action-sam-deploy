@@ -74,7 +74,7 @@ jobs:
           --stack-name ${{ inputs.stack_name }} \
           --s3-bucket ${{ inputs.s3_bucket }} \
           --region ${{ inputs.region }} \
-          --parameter-overrides "$( < "${{ inputs.sam_params_repo_path}}" )"
+          --parameter-overrides $( < "${{ inputs.sam_params_repo_path}}" )
 
       - name: Cleanup AWS Credentials
         run: rm -rf .aws
