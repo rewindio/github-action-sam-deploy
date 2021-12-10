@@ -15,6 +15,7 @@ on:
       stack_name:
         description: "The stack name of your application"
         required: true
+        type: string
       sam_params_repo_path:
         description: "The path from the repository root to your SAM parameter config file"
         required: true
