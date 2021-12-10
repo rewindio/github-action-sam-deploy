@@ -44,8 +44,6 @@ on:
         description: "A token to look up users by email and message them directly. This requires the GitHub & Slack email to match, and the 'Keep my email addresses private' option disabled. No failures occur in other cases."
         required: true
 
-concurrency: deployment
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
