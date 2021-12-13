@@ -65,7 +65,7 @@ jobs:
         run: sam validate
 
       - name: SAM Build
-        run: sam build
+        run: sam build --use-container
 
       - name: SAM Deploy
         run: |
