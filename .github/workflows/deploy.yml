@@ -22,7 +22,7 @@ on:
         default: "sam-params/st-us-east-1.cfg"
         type: string
       extra_sam_args:
-        description: "Extra SAM arguments to apply. Use sparingly."
+        description: "Extra SAM arguments to apply."
         required: false
         type: string
 
@@ -41,8 +41,14 @@ on:
         description: "The Slack webhook url that maps to a Slack channel. This channel will be notified after a successful deploy."
         required: true
       LOOKUP_USER_EMAIL_SLACK_TOKEN:
-        description: "A token to look up users by email and message them directly. This requires the GitHub & Slack email to match, and the 'Keep my email addresses private' option disabled. No failures occur in other cases."
+        description: |
+          A token to look up users by email and message them directly.
+          This requires the GitHub & Slack email to match, and the 'Keep my email addresses private' option disabled.
+          No failures occur in other cases.
         required: true
+      EXTRA_SAM_BUILD_ARGS:
+        description: "Optional SAM build arguments to use (i.e. --container-env-var GITHUB_TOKEN=snip)."
+        required: false
 
 jobs:
   deploy:
@@ -65,16 +71,17 @@ jobs:
         run: sam validate
 
       - name: SAM Build
-        run: sam build --use-container
+        run: |
+          sam build --use-container ${{ secrets.EXTRA_SAM_BUILD_ARGS }}
 
       - name: SAM Deploy
         run: |
           sam deploy \
-          ${{ inputs.extra_sam_args }} \
-          --stack-name ${{ inputs.stack_name }} \
-          --s3-bucket ${{ inputs.s3_bucket }} \
-          --region ${{ inputs.region }} \
-          --parameter-overrides $( < "${{ inputs.sam_params_repo_path}}" )
+            ${{ inputs.extra_sam_args }} \
+            --stack-name ${{ inputs.stack_name }} \
+            --s3-bucket ${{ inputs.s3_bucket }} \
+            --region ${{ inputs.region }} \
+            --parameter-overrides $( < "${{ inputs.sam_params_repo_path}}" )
 
       - name: Cleanup AWS Credentials
         run: rm -rf .aws
