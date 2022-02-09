@@ -76,7 +76,9 @@ jobs:
 
       - name: SAM Validate
         run: sam validate
-
+      - name: Announce cache
+        run: 'echo Cache hit?: ${{ steps.cache.outputs.cache-hit }}'
+        
       - name: SAM Build
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
