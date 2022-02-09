@@ -57,6 +57,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup SAM
+        uses: aws-actions/setup-sam@v1
+
+      - name: Cache SAM build
+        uses: actions/cache@v2
+        with:
+          path: |
+            .aws-sam/build/
+          key: ${{ runner.os }}-${{ GITHUB_SHA }}
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -66,16 +76,6 @@ jobs:
 
       - name: SAM Validate
         run: sam validate
-
-      - name: Cache SAM build
-        uses: actions/cache@v2
-        with:
-          path: |
-            .aws-sam/build/
-          key: ${{ runner.os }}-${{ GITHUB_SHA }}
-
-      - name: Setup SAM
-        uses: aws-actions/setup-sam@v1
 
       - name: SAM Build
         if: steps.cache.outputs.cache-hit != 'true'
