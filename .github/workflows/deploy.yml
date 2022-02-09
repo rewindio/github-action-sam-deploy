@@ -61,6 +61,7 @@ jobs:
         uses: aws-actions/setup-sam@v1
 
       - name: Cache SAM build
+        id: cache
         uses: actions/cache@v2
         with:
           path: |
@@ -76,6 +77,7 @@ jobs:
 
       - name: SAM Validate
         run: sam validate
+
       - name: Announce cache
         run: 'echo Cache hit?: ${{ steps.cache.outputs.cache-hit }}'
         
