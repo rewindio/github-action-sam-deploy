@@ -77,7 +77,6 @@ jobs:
 
       - name: SAM Validate
         run: sam validate
-        
       - name: SAM Build
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
