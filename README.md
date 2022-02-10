@@ -20,7 +20,7 @@ jobs:
     name: "Deploy SAM Application to Staging"
 
     # Please replace all X.Y.Z values with the latest tag.
-    uses: rewindio/github-action-sam-deploy/.github/workflows/sam-deploy.yml@vX.Y.Z
+    uses: rewindio/github-action-sam-deploy/.github/workflows/deploy.yml@vX.Y.Z
     with:
       s3_bucket: "my-unique-bucket-name-staging"
       stack_name: "my-stack-name"
@@ -41,7 +41,7 @@ jobs:
     needs: [ deploy-sam-to-staging ]
 
     # Please replace all X.Y.Z values with the latest tag.
-    uses: rewindio/github-action-sam-deploy/.github/workflows/sam-deploy.yml@vX.Y.Z
+    uses: rewindio/github-action-sam-deploy/.github/workflows/deploy.yml@vX.Y.Z
     with:
       s3_bucket: "my-unique-bucket-name-production"
       stack_name: "my-stack-name"
