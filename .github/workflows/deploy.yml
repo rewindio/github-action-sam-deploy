@@ -59,6 +59,8 @@ jobs:
 
       - name: Setup SAM
         uses: aws-actions/setup-sam@v1
+        with:
+          version: 1.37.0
 
       - name: Cache SAM build
         id: cache
