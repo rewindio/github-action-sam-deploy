@@ -68,7 +68,7 @@ jobs:
         with:
           path: |
             .aws-sam/build/
-          key: ${{ runner.os }}-${{ env.GITHUB_SHA }}
+          key: ${{ runner.os }}-${{ github.sha }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -79,6 +79,7 @@ jobs:
 
       - name: SAM Validate
         run: sam validate
+
       - name: SAM Build
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
