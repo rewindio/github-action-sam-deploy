@@ -62,14 +62,6 @@ jobs:
         with:
           version: 1.37.0
 
-      - name: Cache SAM build
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            .aws-sam/build/
-          key: ${{ runner.os }}-${{ github.sha }}
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -81,7 +73,6 @@ jobs:
         run: sam validate
 
       - name: SAM Build
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           sam build --use-container ${{ secrets.EXTRA_SAM_BUILD_ARGS }}
 
